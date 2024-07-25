@@ -1,0 +1,72 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+<h1>Halaman Admin</h1>
+    <br>
+
+<form action="" method=POST>
+    {% csrf_token %}
+
+    <h2>Status Portal</h2>
+
+    <div class="card">
+        <div class="card-header">
+            As for <strong>{{ time }}</strong>
+        </div>
+        <div class="card-body">
+        <p class="card-text">Bilangan Penulis: <strong>{{ num_username }}</strong></p>
+        <p class="card-text">Bilangan Perkongsian: <strong>{{ num_story }}</strong></p>
+        </div>
+    </div>
+
+<br><br>
+
+<h2>Perkongsian</h2>
+
+<form action="" method="POST">
+{% csrf_token %}
+
+<table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tajuk</th>
+        <th scope="col">Penulis</th>
+        <th scope="col">Masa</th>
+        <th scope="col">Kelulusan Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {% for story in story_list %}
+        <th scope="row">{{ story.id }}</th>
+        <td><a href="{% url 'show_story' story.id %}">{{ story }}</a></td>
+        <td>{{ story.username }}</td>
+        <td>{{ story.created_at }}</td>
+        <td>
+            {% if story.approved %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value={{story.id}} checked="checked" name="boxes">
+                </div>
+            {% else %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value={{story.id}} name="boxes">
+                </div>
+            {% endif %}
+        </td>
+      <tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  
+  <button class="btn btn-secondary" type="submit"> Kemaskini</button>
+  
+
+  <br><br>
+
+
+</center>
+<br><br><br>
+{% endblock%}

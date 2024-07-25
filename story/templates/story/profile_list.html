@@ -1,0 +1,52 @@
+{% extends 'story/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Para Penulis</h1>
+    <br>
+
+    {% if profiles %}
+    {% for profile in profiles_list %}
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" class="img-fluid rounded-start" alt="profile image">
+            {% else %}
+                <img src="{% static 'images/default_pic.webp' %}" class="img-fluid rounded-start" alt="profile image">
+            {% endif %}
+        </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="color: black;" href="{% url 'show_profile' profile.user.id %}">{{ profile.user.username }}</a></h5>
+              <p class="card-text">{{ profile.profile_bio }}</p>
+              <p class="card-text"><small class="text-body-secondary">{{ profile.date_modified }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div> <br>
+    {% endfor %}
+    {% endif %}
+
+    <!--pagination-->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if profiles_list.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ profiles_list.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        {% for i in nums %}
+        <li class="page-item"><a class="page-link" href="?page= {{ forloop.counter }}"> {{ forloop.counter }}</a></li>
+       
+        {% endfor %}
+    
+        {% if profiles_list.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ profiles_list.next_page_number }}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ profiles_list.paginator.num_pages }}">Last &raquo</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+<br><br><br>
+{% endblock%}
+

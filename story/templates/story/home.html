@@ -1,0 +1,73 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+    <h1>Selamat Datang Rakyat Marhaen Sekalian...</h1>
+    <br>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tajuk</th>
+            <th scope="col">Penulis</th>
+            <th scope="col">Masa</th>
+            <th scope="col">Reaksi</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+         {% for story in storys %}
+          <tr>
+            {% if story.approved %}
+            <th scope="row">{{ story.id }}</th>
+            <td><a href="{% url 'show_story' story.id %}">{{ story }}</a></td>
+            <td>{{ story.username }}</td>
+            <td>{{ story.created_at }}</td>
+            <td>
+
+              {{story.number_of_likes }} <i class="fa-solid fa-heart"></i>
+      
+
+              {% if story.number_of_sads %}
+                {{story.number_of_sads }} <i class="fa-solid fa-face-sad-cry"></i>
+              {% endif %}
+              {% if story.number_of_laughs %}
+                {{story.number_of_laughs }} <i class="fa-solid fa-face-laugh"></i>
+              {% endif %}
+              {% if story.number_of_angrys %}
+                {{story.number_of_angrys }} <i class="fa-solid fa-face-angry"></i>
+              {% endif %}
+              {% if story.number_of_shocks %}
+                {{story.number_of_shocks }}  <i class="fa-solid fa-face-surprise"></i>
+              {% endif %}
+            </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+      </table>
+    
+    <!--pagination-->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if storys.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ storys.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        {% for i in nums %}
+        <li class="page-item"><a class="page-link" href="?page= {{ forloop.counter }}"> {{ forloop.counter }}</a></li>
+       
+        {% endfor %}
+    
+        {% if storys.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ storys.next_page_number }}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ storys.paginator.num_pages }}">Last &raquo</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+</center>
+<br><br><br>
+{% endblock%}

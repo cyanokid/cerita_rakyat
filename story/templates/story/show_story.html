@@ -1,0 +1,100 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+    <h1>{{ story.title }}</h1>
+    <br>
+
+    {{ story.content }}
+    <br><br>
+
+    -By <strong>{{ story.username }}</strong> ({{ story.created_at }})
+
+    <br><br>
+
+    <!--Emoji Section-->
+
+    {{story.number_of_likes }} - 
+
+    {% if user in story.likes.all %}
+    <a href="{% url 'story_like' story.id %}">
+        <i class="fa-solid fa-heart"></i>
+    </a>
+
+    {% else %}
+    <a href="{% url 'story_like' story.id %}">
+        <i class="fa-regular fa-heart"></i>
+    </a>
+
+    {% endif %}
+
+    <br>
+
+    {{story.number_of_sads }} - 
+
+    {% if user in story.sads.all %}
+    <a href="{% url 'story_sad' story.id %}">
+        <i class="fa-solid fa-face-sad-cry"></i>
+    </a>
+
+    {% else %}
+    <a href="{% url 'story_sad' story.id %}">
+        <i class="fa-regular fa-face-sad-cry"></i>
+    </a>
+
+    {% endif %}
+
+    <br>
+
+    {{story.number_of_laughs }} - 
+
+    {% if user in story.laughs.all %}
+    <a href="{% url 'story_laugh' story.id %}">
+        <i class="fa-solid fa-face-laugh"></i>
+    </a>
+
+    {% else %}
+    <a href="{% url 'story_laugh' story.id %}">
+        <i class="fa-regular fa-face-laugh"></i>
+    </a>
+
+    {% endif %}
+
+    <br>
+
+    {{story.number_of_angrys }} - 
+
+    {% if user in story.angrys.all %}
+    <a href="{% url 'story_angry' story.id %}">
+        <i class="fa-solid fa-face-angry"></i>
+    </a>
+
+    {% else %}
+    <a href="{% url 'story_angry' story.id %}">
+        <i class="fa-regular fa-face-angry"></i>
+    </a>
+
+    {% endif %}
+
+    <br>
+
+    {{story.number_of_shocks }} -
+
+    {% if user in story.shocks.all %}
+    <a href="{% url 'story_shock' story.id %}">
+        <i class="fa-solid fa-face-surprise"></i>
+    </a>
+
+    {% else %}
+    <a href="{% url 'story_shock' story.id %}">
+        <i class="fa-regular fa-face-surprise"></i>
+    </a>
+
+    {% endif %}
+
+
+
+</center>
+<br><br><br>
+{% endblock%}

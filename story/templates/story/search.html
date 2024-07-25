@@ -1,0 +1,24 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+    {% if searched %}
+        <h1>Anda Mencari {{ searched }}...</h1>
+        <br>
+
+        {% for story in stories %}
+            <a href="{% url 'show_story' story.id %}">{{story}} - By @{{ story.username }}</a><br>
+        {% endfor %}
+
+        {% for profile in profiles %}
+            <a href="{% url 'show_profile' profile.user.id %}">{{ profile }} - {{ profile.profile_bio }}</a><br>
+        {% endfor %}
+
+    {% else %}
+        <h1>Anda Belum Membuat Carian...</h1>
+    {% endif %}
+    <br>
+</center>
+<br><br>
+{% endblock%}

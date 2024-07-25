@@ -1,0 +1,21 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+    <h1>Kemas Kini Profil</h1>
+    <br>
+
+</center>
+
+<form action="" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+
+    <button type="submit" class="btn btn-primary">Kemaskini</button>
+</form>
+
+<br><br><br>
+{% endblock%}

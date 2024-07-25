@@ -1,0 +1,27 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+    <h1>Masuk Ke Akaun Anda</h1>
+    <br>
+</center>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Kata Nama</label>
+          <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+    
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Kata Laluan</label>
+          <input type="password" class="form-control" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Masuk</button>
+      </form>
+
+
+
+<br><br><br>
+{% endblock%}

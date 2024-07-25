@@ -1,0 +1,57 @@
+{% extends 'story/base.html' %}
+
+
+{% block content %}
+<center>
+    <h1>Kongsikan Cerita Anda</h1>
+    <br><br>
+</center>
+    {% if submitted%}
+    <center>
+        Perkongsian Anda Sudah Berjaya Dihantar. 
+    </center>
+         
+    {% else %}
+
+        <!-- {% if user.is_authenticated %} 
+        <form action="" method="POST">
+            {% csrf_token %}
+            
+            Tajuk:
+            {{ form.title }} <br>
+
+            Cerita Anda:
+            {{ form.content }} <br>
+    
+            <input type="submit" value="Hantar" class="btn btn-secondary">
+                    
+            </form>
+
+        {% else %}
+        <form action="" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Hantar" class="btn btn-secondary">
+                
+        </form>
+
+        {% endif%}
+    -->
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Hantar" class="btn btn-secondary">
+                
+        </form>
+        
+    {% endif %}
+    
+
+
+<br><br><br>
+{% endblock%}
